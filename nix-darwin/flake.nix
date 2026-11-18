@@ -20,10 +20,14 @@
         pkgs.vim
       ];
 
-      nix.settings.experimental-features = "nix-command flakes";
-      # nix.configureBuildUsers / nix.useDaemon: removed upstream, no longer
-      # have any effect — nix-darwin now manages build users and the daemon
-      # unconditionally whenever nix.enable is on.
+      # We installed Nix via the Determinate Systems installer, which runs
+      # its own daemon (determinate-nixd) and already configures
+      # nix-command/flakes. nix-darwin's own Nix-management (nix.enable,
+      # which defaults to true) conflicts with that — it tries to install/
+      # configure Nix itself — so it's turned off here; Determinate stays
+      # in charge of the Nix installation, nix-darwin just manages the
+      # system config on top of it.
+      nix.enable = false;
 
       programs.zsh.enable = true; # default login shell on macOS
 
