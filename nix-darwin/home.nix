@@ -22,6 +22,7 @@
     zsh-syntax-highlighting
     zsh-autosuggestions
     television
+    gh-dash # verify this is the standalone binary, not a gh-extension-only package, before first switch
 
     # git / dev workflow
     git
