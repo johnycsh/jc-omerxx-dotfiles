@@ -72,7 +72,7 @@
     yt-dlp
     sqlcipher
     fish
-    felinks
+    elinks # nixpkgs doesn't have felinks (a fork of elinks); closest equivalent
     notcurses
     verilator
 
