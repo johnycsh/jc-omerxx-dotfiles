@@ -55,7 +55,7 @@
     };
   in
   {
-    darwinConfigurations."johnycsh-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."DRP-e1" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         configuration
@@ -67,6 +67,6 @@
       ];
     };
 
-    darwinPackages = self.darwinConfigurations."johnycsh-MacBook-Pro".pkgs;
+    darwinPackages = self.darwinConfigurations."DRP-e1".pkgs;
   };
 }
