@@ -33,9 +33,9 @@
     rustc
     cargo # brew's "rust" formula installs both rustc + cargo; pkgs.rust itself is a toolchain attrset, not an installable package
     pyenv
-    python311
-    python311Packages.tkinter
-    python311Packages.ipython
+    python312
+    python312Packages.tkinter
+    python312Packages.ipython
     uv
     virtualenv
     pandoc
