@@ -103,7 +103,16 @@
 
   programs.atuin = {
     enable = true;
-    # settings = { };  # port over atuin/config.toml once compared against current setup
+    # Fully declarative, same reasoning as starship below: his
+    # config.toml was almost entirely defaults (commented-out docs) with
+    # only these three overrides actually set, so home-manager now
+    # generates ~/.config/atuin/config.toml and atuin/ is removed from
+    # this repo rather than kept Stow-symlinked.
+    settings = {
+      style = "compact";
+      enter_accept = true;
+      sync.records = true;
+    };
   };
 
   programs.starship = {
