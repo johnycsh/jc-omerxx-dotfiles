@@ -78,8 +78,7 @@ fi
 # Starship / zoxide / atuin / direnv — the binaries and config are
 # Nix-managed (nix-darwin/home.nix), but the shell-hook activation lives
 # here since this file, not home-manager, owns zsh startup.
-eval "$(starship init zsh)"
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init zsh)" # config is Nix-generated at ~/.config/starship.toml (default path, no override needed)
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 eval "$(direnv hook zsh)"
