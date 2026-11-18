@@ -178,7 +178,16 @@
     nix-direnv.enable = true;
   };
 
-  home.sessionVariables = { };
+  # /etc/profiles/per-user/<user> is built with a restricted pathsToLink —
+  # it exposes bin/man/etc but NOT arbitrary share/<pkgname> dirs, so a
+  # guessed filesystem path to zsh-autosuggestions' plugin file doesn't
+  # resolve even though the package is genuinely installed. Export the
+  # exact store path instead; home-manager's sessionVariables mechanism
+  # (hm-session-vars.sh, sourced via /etc/zprofile) works independently of
+  # that restriction. zshrc/.zshrc sources this by variable, not by guess.
+  home.sessionVariables = {
+    ZSH_AUTOSUGGESTIONS_PATH = "${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+  };
 
   home.sessionPath = [
     "/run/current-system/sw/bin"

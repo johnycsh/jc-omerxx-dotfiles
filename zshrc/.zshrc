@@ -7,8 +7,11 @@ compinit
 # Homebrew stays for GUI casks / custom taps, so keep its shims on PATH
 export PATH=/opt/homebrew/bin:$PATH
 
-# zsh-autosuggestions (installed via Nix — see nix-darwin/home.nix)
-source "$HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# zsh-autosuggestions (installed via Nix — see nix-darwin/home.nix).
+# Its share/ dir isn't linked into /etc/profiles/per-user/<user> (that
+# profile only exposes bin/man/etc), so home.nix exports the exact store
+# path as $ZSH_AUTOSUGGESTIONS_PATH instead of guessing a filesystem path.
+[ -n "$ZSH_AUTOSUGGESTIONS_PATH" ] && source "$ZSH_AUTOSUGGESTIONS_PATH"
 bindkey '^w' autosuggest-execute
 bindkey '^e' autosuggest-accept
 bindkey '^u' autosuggest-toggle
@@ -63,7 +66,7 @@ bindkey jj vi-cmd-mode
 # navigation
 cx() { cd "$@" && ls -la; }
 fcd() { cd "$(find . -type d -not -path '*/.*' | fzf)" && ls -la; }
-f() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy }
+fp() { echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy } # named fp, not f — this machine already has `alias f=fff` (the fff file manager) and zsh can't redefine an existing alias as a function
 fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 alias mat='osascript -e "tell application \"System Events\" to key code 126 using {command down}" && tmux neww "cmatrix"'
