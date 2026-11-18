@@ -21,6 +21,7 @@
     tree
     zsh-syntax-highlighting
     zsh-autosuggestions
+    television
 
     # git / dev workflow
     git
