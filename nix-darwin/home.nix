@@ -34,9 +34,9 @@
     pyenv
     python311
     python311Packages.tkinter
+    python311Packages.ipython
     uv
     virtualenv
-    ipython
     pandoc
     automake
     cmake
