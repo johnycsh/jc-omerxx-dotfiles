@@ -15,6 +15,7 @@
   # Grow this list tool-by-tool as each one gets migrated in later commits.
   home.packages = with pkgs; [
     # shell / fuzzy / nav
+    stow
     fzf
     ripgrep
     bat
