@@ -30,7 +30,8 @@
     lazygit
     tig
     go
-    rust
+    rustc
+    cargo # brew's "rust" formula installs both rustc + cargo; pkgs.rust itself is a toolchain attrset, not an installable package
     pyenv
     python311
     python311Packages.tkinter
