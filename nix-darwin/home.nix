@@ -20,6 +20,7 @@
     bat
     tree
     zsh-syntax-highlighting
+    zsh-autosuggestions
 
     # git / dev workflow
     git
@@ -90,30 +91,30 @@
   # openvino, lsusb, tuios, fpp, gdb   -> less common; check `nix search nixpkgs <name>` first
 
   # --- Declarative program configs -------------------------------------
-  # These give Nix ownership of both the binary and its config, instead of
-  # Stow just symlinking a hand-edited file. Everything else in this repo
-  # (zshrc, tmux.conf, etc.) stays Stow-managed for now.
+  # These give Nix ownership of the binary + its config file, instead of
+  # Stow just symlinking a hand-edited file. NOTE: enableZshIntegration is
+  # deliberately left off all four — that flag makes home-manager inject
+  # its init hooks into home-manager's OWN generated ~/.zshrc, which only
+  # happens if programs.zsh.enable = true here. We're keeping the real
+  # .zshrc Stow-managed instead (zshrc/.zshrc in this repo), so the
+  # `eval "$(atuin init zsh)"` etc. lines live there by hand, same as
+  # omerxx's original file did. Nix still owns the binary + `settings`;
+  # Stow's .zshrc just owns the one-line shell-hook activation.
 
   programs.atuin = {
     enable = true;
-    enableZshIntegration = true;
     # settings = { };  # port over atuin/config.toml once compared against current setup
   };
 
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
     # settings = { };  # port over starship/starship.toml, translated to Nix attrs
   };
 
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.zoxide.enable = true;
 
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
 
@@ -126,15 +127,8 @@
 
   programs.home-manager.enable = true;
 
-  # programs.zsh stays minimal: the real .zshrc is Stow-managed, this just
-  # makes sure Nix's PATH additions land in any shell.
-  programs.zsh = {
-    enable = true;
-    initExtra = ''
-      export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
-      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-      fi
-    '';
-  };
+  # programs.zsh is intentionally NOT enabled here — see note above.
+  # Nix's PATH additions and the Nix daemon sourcing live directly in the
+  # Stow-managed zshrc/.zshrc instead, so there's exactly one place that
+  # owns zsh startup.
 }
