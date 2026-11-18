@@ -84,7 +84,7 @@ keybindings:
         cd {{.RepoPath}}; lazygit
   # a 'C' code-review keybinding lived here, shelling out to a 'wt' tool
   # (not in this repo at all) + opencode with a custom review prompt.
-  # Dropped until wt/opencode are actually set up — re-add then.
+  # Dropped — not using opencode in this setup (using Pi instead).
 
 theme:
   colors:
