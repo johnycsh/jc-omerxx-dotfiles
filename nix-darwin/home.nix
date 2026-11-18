@@ -47,7 +47,7 @@
     rsync
     mosh
     nmap
-    telnet
+    inetutils # provides telnet, among other classic net utils
     wireguard-tools
     s3cmd
     qemu
