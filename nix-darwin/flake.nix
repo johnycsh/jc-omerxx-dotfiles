@@ -21,8 +21,9 @@
       ];
 
       nix.settings.experimental-features = "nix-command flakes";
-      nix.configureBuildUsers = true;
-      nix.useDaemon = true;
+      # nix.configureBuildUsers / nix.useDaemon: removed upstream, no longer
+      # have any effect — nix-darwin now manages build users and the daemon
+      # unconditionally whenever nix.enable is on.
 
       programs.zsh.enable = true; # default login shell on macOS
 
@@ -30,7 +31,12 @@
       system.stateVersion = 4;
       nixpkgs.hostPlatform = "aarch64-darwin"; # Apple Silicon
 
-      security.pam.enableSudoTouchIdAuth = true;
+      # Renamed upstream from security.pam.enableSudoTouchIdAuth
+      security.pam.services.sudo_local.touchIdAuth = true;
+
+      # Recent nix-darwin runs system activation as root and applies
+      # user-scoped options (like homebrew.enable below) to this user instead.
+      system.primaryUser = "johnycsh";
 
       users.users.johnycsh.home = "/Users/johnycsh";
       home-manager.backupFileExtension = "backup"; # don't error on pre-existing files, rename-and-keep them instead
