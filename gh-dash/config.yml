@@ -82,12 +82,9 @@ keybindings:
       name: lazygit
       command: >
         cd {{.RepoPath}}; lazygit
-  prs:
-    - key: C
-      name: code review
-      command: >
-        tmux new-window -n "PR-{{.PrNumber}}" 
-        'wt switch pr:{{.PrNumber}} -x "opencode --prompt `@code-reviewer: review-pr-for-this-branch`"'
+  # a 'C' code-review keybinding lived here, shelling out to a 'wt' tool
+  # (not in this repo at all) + opencode with a custom review prompt.
+  # Dropped — not using opencode in this setup (using Pi instead).
 
 theme:
   colors:
@@ -109,8 +106,6 @@ theme:
     table:
       showSeparator: true
       compact: true
-pager:
-  diff: "diffnav"
 confirmQuit: false
 showAuthorIcons: true
 smartFilteringAtLaunch: true
