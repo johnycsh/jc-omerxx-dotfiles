@@ -107,15 +107,25 @@
 
   programs.atuin = {
     enable = true;
-    # Fully declarative, same reasoning as starship below: his
-    # config.toml was almost entirely defaults (commented-out docs) with
-    # only these three overrides actually set, so home-manager now
-    # generates ~/.config/atuin/config.toml and atuin/ is removed from
-    # this repo rather than kept Stow-symlinked.
+    # Fully declarative — but NOTE: atuin's binary checks ~/.atuin/config.toml
+    # BEFORE the XDG ~/.config/atuin/config.toml, so this has no effect at
+    # all until that legacy file is retired (atuin prints a warning and
+    # ignores the Nix-generated one otherwise). These settings are ported
+    # from the REAL legacy config found on the machine (not omerxx's —
+    # his only had style/enter_accept/sync.records, none of which matched
+    # what was actually live here). db_path/key_path are pinned to the
+    # existing legacy data location so real history isn't orphaned behind
+    # a changed default path.
     settings = {
-      style = "compact";
+      search_mode = "daemon-fuzzy";
       enter_accept = true;
-      sync.records = true;
+      daemon = {
+        enabled = true;
+        autostart = true;
+      };
+      threads.capture = true;
+      db_path = "~/.atuin/data/history.db";
+      key_path = "~/.atuin/data/key";
     };
   };
 
