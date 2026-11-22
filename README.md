@@ -1,4 +1,9 @@
-# Dotfiles
+---
+created: 20261119
+sensitivity: public
+tags: 
+---
+# (jc's) Dotfiles
 
 Personalized fork of [omerxx/dotfiles](https://github.com/omerxx/dotfiles),
 adapted for my own machine. Package management is moving to Nix
